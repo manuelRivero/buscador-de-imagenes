@@ -103,9 +103,9 @@ export default class App extends Component {
   content = ( )=> {
      return (
       <div className="App container">
-          <div className="jumbotron">
-              <p className="lead text-center">Buscador de imagenes</p>
-              <Buscador criterio = {this.criterio}></Buscador>
+          <div className="jumbotron mt-5">
+              <p className="lead text-center display-4">Buscador de imagenes</p>
+              <Buscador criterio = {this.criterio} isloading={this.state.loading}></Buscador>
           </div>
           <div className="row justify-content-center">
                 { 
