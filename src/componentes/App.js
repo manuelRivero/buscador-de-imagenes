@@ -2,6 +2,7 @@ import React , {Component}from 'react';
 import Buscador from './Buscador/Buscador';
 import Imagenes from './Imagenes/Imagenes';
 import Spinner from './Spinner/Spinner';
+import ImgModal from './imgModal/imgModal';
 
 export default class App extends Component {
 
@@ -11,6 +12,8 @@ export default class App extends Component {
     loading:false,
     page:1,
     totalPages:null,
+    showModal:true,
+    selectedImg:null,
     error:{
       status:false,
       message:null
@@ -89,7 +92,13 @@ export default class App extends Component {
   }
   renderImg = () => {
     const {imagenes, totalPages, page} = this.state;
-    return <Imagenes imagenes={imagenes} backPage={this.backPage} fowardPage={this.fowardPage} totalPages={totalPages} page={page}/>
+    return <Imagenes 
+                imagenes={imagenes} 
+                backPage={this.backPage} 
+                fowardPage={this.fowardPage} 
+                totalPages={totalPages} 
+                page={page}
+                clickedImg={this.clickImgHandler}/>
   }
   renderErrorAlert = () => {
       return  (
@@ -99,6 +108,15 @@ export default class App extends Component {
       )
   }
 
+  closeHandler = () => {
+    this.setState({showModal:false})
+  }
+
+  clickImgHandler=(img)=>{
+    this.setState({selectedImg: img,
+                    showModal:true
+                  });
+  }
   // content to be render
   content = ( )=> {
      return (
@@ -122,6 +140,7 @@ export default class App extends Component {
                 }
                 
           </div>
+          <ImgModal show={this.state.showModal} close={this.closeHandler} data={this.state.selectedImg} />
       </div>
       )
   

@@ -12,7 +12,7 @@ export default class Imagenes extends Component {
               <div className="col-12 p-5 row">
                 {
                   imagenes.map( (imagen, index) => (
-                  <Imagen key={index} imagen={imagen} />
+                  <Imagen key={index} imagen={imagen} clicked={this.props.clickedImg} />
                   ))
                 }
               </div>
