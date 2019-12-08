@@ -2,7 +2,7 @@ import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import styles from './imgModal.module.css'
 
-import spinnerGif from '../../assets/images/spinner.gif';
+import ImgSpinner from './../../UI/imgSpinner/imgSpinner';
 
 export default function ImgModal(props) {
   if(!props.data){
@@ -16,9 +16,7 @@ export default function ImgModal(props) {
     <Modal show={props.show} onHide={props.close} >
    
     <Modal.Body>
-      <div style={{backgroundImage:`url(${spinnerGif})`}}>
-              <img  src={largeImageURL} alt={tags} style={{width:'100%'}} />
-      </div>
+        <ImgSpinner largeImageURL={largeImageURL} tags={tags} />
     </Modal.Body>
     <Modal.Footer>
       <Button variant="secondary" onClick={props.close}>
