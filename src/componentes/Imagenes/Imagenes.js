@@ -9,7 +9,7 @@ export default class Imagenes extends Component {
         
         return ( 
           <React.Fragment>
-              <div className="col-12 p-5 row">
+              <div className="col-12 row">
                 {
                   imagenes.map( (imagen, index) => (
                   <Imagen key={index} imagen={imagen} clicked={this.props.clickedImg} />
