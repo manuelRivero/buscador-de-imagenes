@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+
+import {Alert} from 'react-bootstrap'
 // css
 import './buscador.css';
 
@@ -58,7 +60,8 @@ export default class Buscador extends Component {
                                 onChange={this.inputChangeHandler}
                                 onAnimationEnd={this.animationEndHandler} 
                         />
-                        {this.state.showMissinInputAlert && <p> Intenta escribiendo algo</p>}
+                        {this.state.showMissinInputAlert && 
+                            <Alert variant="light" > Intenta escribir algo primero </Alert>}
 
                     </div>
                     <div className=" form-group col-md-2">
