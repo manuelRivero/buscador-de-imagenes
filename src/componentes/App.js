@@ -4,6 +4,8 @@ import Imagenes from './Imagenes/Imagenes';
 import Spinner from './Spinner/Spinner';
 import ImgModal from './imgModal/imgModal';
 
+import Alert from 'react-bootstrap/Alert'
+
 export default class App extends Component {
 
   state={
@@ -14,14 +16,12 @@ export default class App extends Component {
     totalPages:null,
     showModal:true,
     selectedImg:null,
-    error:{
-      status:false,
-      message:null
-    }
+    error:null
   }
   getData =  (criterio, page = 0) => {
           this.setState({
-            loading:true
+            loading:true,
+            error:null
           })
           console.log(`este es el estado ${this.state}`)
           const url= `https://pixabay.com/api/?key=12382521-b5a34d282a2dc46fad2f95cf3&q=${criterio}&page=${page}`;
@@ -33,19 +33,14 @@ export default class App extends Component {
               imagenes:res.hits,
               loading:false,
               totalPages,
-              error:{
-                status:false
-              }
+              error:null
             });
           }).catch( err => {
-            console.log(err.message)
+            let message =  "Tal parece que alguien del backend no hizo bien su trabajo! estamos trabajando para resolver este problema :)"
             this.setState({
               loading:false,
               criterio:null,
-              error:{
-                status:true,
-                message:err.message
-              }
+              error:message
             })
           })
    }
@@ -100,11 +95,19 @@ export default class App extends Component {
                 page={page}
                 clickedImg={this.clickImgHandler}/>
   }
+  closeAlertHanler = ()=>{
+    this.setState({error:null})
+
+  }
   renderErrorAlert = () => {
       return  (
-      <div class="alert alert-danger" role="alert">
-          <p>{this.state.error.message}</p>
-      </div>
+        
+      <Alert variant="danger" onClose={this.closeAlertHanler} dismissible>
+      <Alert.Heading>Oh no! algo paso!</Alert.Heading>
+      <p>
+        {this.state.error}
+      </p>
+    </Alert>
       )
   }
 
@@ -120,8 +123,8 @@ export default class App extends Component {
   // content to be render
   content = ( )=> {
      return (
-      <div className="App container">
-          <div className="jumbotron mt-5">
+      <div className="App container" >
+          <div  className="jumbotron mt-5">
               <p className="lead text-center display-4">Buscador de imagenes</p>
               <Buscador criterio = {this.criterio} isloading={this.state.loading}></Buscador>
           </div>
@@ -131,11 +134,11 @@ export default class App extends Component {
                     this.renderSpinner()
                  }
                  {
-                   (this.state.imagenes && !this.state.error.status && !this.state.loading ) &&
+                   (this.state.imagenes && !this.state.error && !this.state.loading ) &&
                     this.renderImg()
                 }
                 {
-                  this.state.error.status &&
+                  this.state.error &&
                   this.renderErrorAlert()
                 }
                 

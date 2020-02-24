@@ -48,14 +48,13 @@ export default class Buscador extends Component {
     }
 
   render() {
-    console.log("render")
     return (
       <div className="buscador mt-5">
           <form onSubmit={this.handle}>
                 <div className="row justify-content-center">
                     <div className='form-group input-group-lg col-md-6'>
                         <input type="text"
-                                className={this.state.animationOn ? "form-control shake" : "form-control"}
+                                className={this.state.animationOn ? "form-control mb-2 shake" : "form-control mb-2"}
                                 placeholder="Busca tu imagen" 
                                 onChange={this.inputChangeHandler}
                                 onAnimationEnd={this.animationEndHandler} 
