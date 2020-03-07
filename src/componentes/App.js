@@ -3,7 +3,9 @@ import Buscador from './Buscador/Buscador';
 import Imagenes from './Imagenes/Imagenes';
 import Spinner from './Spinner/Spinner';
 import ImgModal from './imgModal/imgModal';
+import Navbar from './layout/nabvar/navbar'
 
+// bootstrap
 import Alert from 'react-bootstrap/Alert'
 
 export default class App extends Component {
@@ -123,7 +125,9 @@ export default class App extends Component {
   // content to be render
   content = ( )=> {
      return (
-      <div className="App container" >
+       <React.Fragment>
+         <Navbar/>
+         <div className="App container" >
           <div  className="jumbotron mt-5">
               <p className="lead text-center display-4">Buscador de imagenes</p>
               <Buscador criterio = {this.criterio} isloading={this.state.loading}></Buscador>
@@ -145,6 +149,8 @@ export default class App extends Component {
           </div>
           <ImgModal show={this.state.showModal} close={this.closeHandler} data={this.state.selectedImg} />
       </div>
+       </React.Fragment>
+      
       )
   
   }
